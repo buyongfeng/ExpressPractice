@@ -1,0 +1,29 @@
+{
+  "name": "ExpressPractice",
+  "version": "1.0.0",
+  "description": "Express Practice",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://buyongfeng:step309929800@github.com/buyongfeng/ExpressPractice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/buyongfeng/ExpressPractice/issues"
+  },
+  "homepage": "https://github.com/buyongfeng/ExpressPractice#readme",
+  "dependencies": {
+    "art-template": "^4.12.2",
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.3",
+    "express-art-template": "^1.0.1",
+    "jquery": "^3.3.1",
+    "mongoose": "^5.1.0"
+  }
+}
