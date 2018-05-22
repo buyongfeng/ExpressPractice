@@ -2,19 +2,20 @@ var express = require('express')
 var router = express.Router()
 
 router.get('/', function(req, res) {
-    console.log('首页')
-    res.end('首页')
+    res.render('index.html')
 })
 
 router.get('/login', function(req, res) {
+    res.render('login.html')
+})
 
-    // return res.status(500).json({
-    //     err_code: 500,
-    //     message: '500错误'
-    // })
-
-    console.log('登录')
-    res.end('登录')
+router.post('/login', function(req, res) {
+    var body = req.body
+    console.log(body)
+    res.status(200).json({
+        err_code: 0,
+        message: 'ok'
+    })
 })
 
 router.get('/logout', function(req, res) {
