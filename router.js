@@ -4,7 +4,10 @@ var User = require('./models/user')
 var router = express.Router()
 
 router.get('/', function(req, res) {
-    res.render('index.html')
+    console.log(req.session.user)
+    res.render('index.html', {
+        user: req.session.user
+    })
 })
 
 router.get('/login', function(req, res) {
@@ -13,7 +16,6 @@ router.get('/login', function(req, res) {
 
 router.post('/login', function(req, res) {
     var body = req.body
-    console.log(body)
     //查询user
     User.findOne({
         email: body.email,
@@ -31,7 +33,10 @@ router.post('/login', function(req, res) {
                 message: 'invalid Email or Password'
             })
         }
-
+        console.log(user)
+        //记录session
+        req.session.user = user
+        console.log(req.session.user)
         res.status(200).json({
             err_code: 0,
             message: 'ok'
@@ -40,10 +45,7 @@ router.post('/login', function(req, res) {
     })
 })
 
-router.get('/logout', function(req, res) {
-    console.log('退出')
-    res.end('退出')
-})
+
 
 router.get('/register', function(req, res) {
     res.render('register.html')
@@ -70,17 +72,27 @@ router.post('/register', function(req, res) {
         }
         //注册
         body.password = md5(md5(body.password))
-        new User(body).save(function(err,user){
-            if(err){
+        new User(body).save(function(err, user) {
+            if (err) {
                 return next(err)
             }
+            //记录session
+            req.session.user = user
+
             res.status(200).json({
                 err_code: 0,
                 message: 'ok'
             })
-        })        
+        })
 
     })
+})
+
+router.get('/logout', function(req, res) {
+    //清除session
+    req.session.user = null
+    //跳转到登录
+    res.redirect('/login')
 })
 
 
